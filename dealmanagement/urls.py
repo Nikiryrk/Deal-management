@@ -18,7 +18,10 @@ from django.contrib import admin
 from django.urls import path
 from start.views.start import start
 
+
 urlpatterns = [
     path('/admin', admin.site.urls),
     path('', start),
+
 ]
+

@@ -18,7 +18,7 @@ NGROKURL = "http://localhost:8000"
 
 APP_SETTINGS = LocalSettingsClass(
     portal_domain='',
-    app_domain='',
+    app_domain='127.0.0.1:8000',
     app_name='is_Demo',
     salt='wefiewofioiI(IF(Eufrew8fju8ewfjhwkefjlewfjlJFKjewubhybfwybgybHBGYBGF',
     secret_key='wefewfkji4834gudrj.kjh237tgofhfjekewf.kjewkfjeiwfjeiwjfijewf',

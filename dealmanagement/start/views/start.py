@@ -35,7 +35,7 @@ def start(request):
                     },
                     'order': {'DATE_CREATE': 'DESC'},
                     'select': [
-                        'ID', 'TITLE', 'STAGE_ID'10-ти
+                        'ID', 'TITLE', 'STAGE_ID'
                         'OPPORTUNITY', 'CURRENCY_ID',
                         'BEGINDATE', 'CLOSEDATE', 'DATE_CREATE','UF_CRM_1755509630'
                     ],

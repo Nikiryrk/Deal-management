@@ -20,7 +20,7 @@ from start.views.start import start
 
 
 urlpatterns = [
-    path('/admin', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', start),
 
 ]

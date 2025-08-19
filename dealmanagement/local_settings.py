@@ -1,7 +1,3 @@
-# Пример local_settings
-# Измените данные на свои
-
-
 DEBUG = True
 ALLOWED_HOSTS = ['*']
 
@@ -19,7 +15,7 @@ NGROKURL = "http://localhost:8000"
 APP_SETTINGS = LocalSettingsClass(
     portal_domain='',
     app_domain='127.0.0.1:8000',
-    app_name='is_Demo',
+    app_name='',
     salt='wefiewofioiI(IF(Eufrew8fju8ewfjhwkefjlewfjlJFKjewubhybfwybgybHBGYBGF',
     secret_key='wefewfkji4834gudrj.kjh237tgofhfjekewf.kjewkfjeiwfjeiwjfijewf',
     application_bitrix_client_id='',
@@ -37,6 +33,6 @@ DATABASES = {
         'NAME': '',  # Or path to database file if using sqlite3.
         'USER': '',  # Not used with sqlite3.
         'PASSWORD': '',  # Not used with sqlite3.
-        'HOST': 'localhost',
+        'HOST': '',
     },
 }

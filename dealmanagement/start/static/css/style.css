@@ -24,11 +24,19 @@ body {
     background: #3498db;
     color: white;
     border: none;
-    padding: 8px 15px;
+    padding: 40px 80px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 24px;
     text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.btn-deals:hover {
+    background: #2980b9;
+    transform: scale(1.05);
 }
 .btn-add-deal {
     background: #2ecc71;

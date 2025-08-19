@@ -9,13 +9,6 @@
 <body>
 <body>
     <div class="container">
-            {% if messages %}
-        <div class="messages">
-            {% for message in messages %}
-                <div class="alert {{ message.tags }}">{{ message }}</div>
-            {% endfor %}
-        </div>
-            {% endif %}
         <div class="header">
             <h1>Ваши сделки, {{ request.bitrix_user.first_name }} {{ request.bitrix_user.last_name }}</h1>
             <button class="btn-add-deal" onclick="toggleDealForm()">Добавить сделку</button>
@@ -68,7 +61,6 @@
                     <th>Дата завершения</th>
                     <td>
                         <input type="date" name="closedate" id="closedate" required>
-                        <div class="date-error" id="dateError">Дата завершения не может быть раньше даты начала</div>
                     </td>
                 </tr>
                     <tr>

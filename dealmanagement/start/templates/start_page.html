@@ -11,7 +11,10 @@
         <div class="header">
             <h1>Добро пожаловать, {{ request.bitrix_user.first_name }} {{ request.bitrix_user.last_name }}</h1>
         </div>
-        <a href="{% url 'deals_table' %}" class="btn-deals">Сделки</a>
+        <div class="buttons-container">
+            <a href="{% url 'deals_table' %}" class="btn-deals">Сделки</a>
+            <a href="{% url 'product' %}" class="btn-deals btn-qr">QR Генератор</a>
+        </div>
     </div>
     <script src="//api.bitrix24.com/api/v1/"></script>
 </body>

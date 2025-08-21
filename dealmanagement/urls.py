@@ -2,6 +2,7 @@ from django.urls import path
 from start.views.start import start
 from start.views import create_deal,Deals
 from qr.views import product, autocomplete
+from employee_table.views import employee_table
 
 urlpatterns = [
     path('', start, name='start'),
@@ -12,5 +13,6 @@ urlpatterns = [
     path('product/<str:uid>/generate_qr/', product.generate_qr, name='generate_qr'),
     path('public/product/<str:token>/', product.public_product, name='public_product'),
     path('autocomplete/', autocomplete.autocomplete, name='autocomplete'),
+    path('employee_table/', employee_table.employee_table, name='employee_table'),
 ]
 

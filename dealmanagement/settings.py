@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'integration_utils.its_utils.app_gitpull',
     'start',
     'qr',
+    'employee_table',
 ]
 
 MIDDLEWARE = [

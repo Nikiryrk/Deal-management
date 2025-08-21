@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ product.name }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .product-card { border: 1px solid #ccc; padding: 20px; border-radius: 10px; max-width: 600px; margin: auto; }
+        .product-images img { max-width: 200px; margin: 10px; }
+    </style>
+</head>
+<body>
+<div class="product-card">
+    <h2>{{ product.name }}</h2>
+    <div><strong>Цена:</strong> {{ product.price }} ₽</div>
+    <div>{{ product.description|safe }}</div>
+    {% if product.images %}
+        <div class="product-images">
+            {% for img in product.images %}
+                <img src="{{ img }}" alt="Фото товара">
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+</body>
+</html>

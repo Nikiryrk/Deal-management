@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сотрудники и руководители</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/employee_table.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>👥 Сотрудники и руководители</h1>
+
+        <div class="actions">
+            <a href="?generate_calls=1" class="btn-generate">📞 Сгенерировать звонки</a>
+        </div>
+
+        {% if employees %}
+            <div class="stats">
+                <span>Всего сотрудников: {{ employees|length }}</span>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th width="25%">Сотрудник</th>
+                        <th width="45%">Руководители</th>
+                        <th width="15%">Звонки (24ч)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for employee in employees %}
+                        <tr>
+                            <td>
+                                <span class="employee-name open-user" data-user-id="{{ employee.id }}">
+                                    👤 {{ employee.name }}
+                                </span>
+                            </td>
+                            <td>
+                                {% if employee.managers %}
+                                    {% for manager in employee.managers %}
+                                        <div class="manager-item">
+                                            <span class="manager-name open-user" data-user-id="{{ manager.id }}">
+                                                {{ manager.name }}
+                                            </span>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <span style="color: #95a5a6;">Нет руководителей</span>
+                                {% endif %}
+                            </td>
+                            <td style="text-align:center;">
+                                {{ employee.calls }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+
+    <!-- Подключаем Bitrix24 JS API -->
+    <script src="https://api.bitrix24.com/api/v1/"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        BX24.init(function () {
+            document.querySelectorAll(".open-user").forEach(function (link) {
+                link.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    const userId = this.getAttribute("data-user-id");
+                    BX24.openPath(`/company/personal/user/${userId}/`);
+                });
+            });
+        });
+    });
+    </script>
+</body>
+</html>

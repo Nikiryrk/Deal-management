@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиск товара</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/product_search.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Товар</h1>
+        </div>
+
+        <h1>Поиск товара</h1>
+
+        <form method="get" class="search-form">
+            <div class="search-input-group">
+                <input type="text" id="product-search" name="uid" placeholder="Введите ID или название товара" autocomplete="off" class="search-input">
+                <button type="submit" class="search-btn">Найти</button>
+                <ul id="autocomplete-list" class="autocomplete-items"></ul>
+            </div>
+        </form>
+
+        {% if product %}
+        <div class="product-card">
+            <h2>{{ product.name }}</h2>
+            <div class="product-price">{{ product.price }} ₽</div>
+            <div class="product-description">{{ product.description|safe }}</div>
+
+            {% if product.images %}
+                <div class="product-images">
+                    {% for img in product.images %}
+                        <img src="{{ img }}" alt="Фото товара">
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <h3>Публичные QR-коды:</h3>
+            {% for link in product.links %}
+                <div class="qr-code-item">
+                    <img src="{% url 'qr_code' token=link.token %}" alt="QR-код">
+                    <h4>
+
+                        Публичная ссылка:
+                        <a href="{{ request.scheme }}://{{ request.get_host }}{% url 'public_product' token=link.token %}" target="_blank">
+                            {{ request.scheme }}://{{ request.get_host }}{% url 'public_product' token=link.token %}
+                        </a>
+                    </h4>
+                </div>
+            {% endfor %}
+
+            <form method="post" action="{% url 'generate_qr' product.id %}" class="qr-generate-form">
+                {% csrf_token %}
+                <button type="submit" class="btn-add-deal">Сгенерировать новый QR-код</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+
+    <script src="{% static 'js/autocomplete.js' %}"></script>
+    <script src="{% static 'js/product_search.js' %}"></script>
+</body>
+</html>

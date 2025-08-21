@@ -1,0 +1,300 @@
+/* Стили для страницы поиска товара */
+.search-container {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+}
+
+.search-form {
+    width: 100%;
+}
+
+.search-input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 5px;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.search-input-group:focus-within {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    transform: translateY(-2px);
+}
+
+.search-icon {
+    padding: 0 15px;
+    color: #6c757d;
+    font-size: 18px;
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 15px 20px;
+    font-size: 16px;
+    outline: none;
+    color: #2c3e50;
+}
+
+.search-input::placeholder {
+    color: #adb5bd;
+}
+
+.search-btn {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.search-btn:hover {
+    background: linear-gradient(135deg, #2980b9, #1c6ea4);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.product-card {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-top: 20px;
+    animation: fadeIn 0.6s ease;
+}
+
+.product-card h2 {
+    margin-top: 0;
+}
+
+.product-price {
+    font-size: 24px;
+    color: #3498db;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.product-description {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.product-images {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.product-images img {
+    max-width: 200px;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.product-images img:hover {
+    transform: scale(1.05);
+}
+
+.qr-code-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.qr-generate-form {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.qr-generate-btn {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    color: white;
+    border: none;
+    padding: 18px 35px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(46, 204, 113, 0.25);
+}
+
+.qr-generate-btn:hover {
+    background: linear-gradient(135deg, #27ae60, #219653);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(46, 204, 113, 0.4);
+}
+
+.qr-generate-btn:active {
+    transform: translateY(-1px);
+}
+
+/* Стили для секции QR-кодов */
+.qr-section {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 2px solid #f1f3f5;
+}
+
+.qr-section h3 {
+    color: #2c3e50;
+    font-size: 24px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.qr-item {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 25px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    border-left: 4px solid #3498db;
+    animation: fadeIn 0.8s ease;
+}
+
+.qr-code-container {
+    flex-shrink: 0;
+}
+
+.qr-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.qr-image:hover {
+    transform: scale(1.05);
+}
+
+.qr-info {
+    flex: 1;
+}
+
+.qr-info h4 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.qr-link {
+    color: #3498db;
+    text-decoration: none;
+    font-size: 14px;
+    word-break: break-all;
+    display: inline-block;
+    padding: 8px 12px;
+    background: white;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.qr-link:hover {
+    color: #2980b9;
+    text-decoration: underline;
+    background: #f8f9fa;
+    border-color: #3498db;
+}
+
+.autocomplete-items {
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 0;
+    padding-left: 0;
+    list-style: none;
+    position: absolute;
+    background: white;
+    width: 100%;
+    z-index: 1000;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    top: 100%;
+    left: 0;
+}
+
+.autocomplete-items li {
+    padding: 10px 15px;
+    transition: background 0.2s ease;
+    cursor: pointer;
+}
+
+.autocomplete-items li:hover {
+    background: #f1f3f5;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .search-input-group {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 15px;
+        margin: 10px 0;
+    }
+
+    .search-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .qr-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .qr-info {
+        min-width: auto;
+    }
+
+    .qr-generate-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .product-images {
+        justify-content: center;
+    }
+
+    .product-images img {
+        max-width: 100%;
+        height: auto;
+    }
+}

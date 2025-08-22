@@ -19,6 +19,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+YANDEX_MAPS_API_KEY = 'db06bacb-7368-42df-b536-9cc056727bd5'
 
 # Application definition
 
@@ -35,6 +36,7 @@ INSTALLED_APPS = [
     'start',
     'qr',
     'employee_table',
+    'map',
 ]
 
 MIDDLEWARE = [

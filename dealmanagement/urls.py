@@ -3,6 +3,7 @@ from start.views.start import start
 from start.views import create_deal,Deals
 from qr.views import product, autocomplete
 from employee_table.views import employee_table
+from map.views import map
 
 urlpatterns = [
     path('', start, name='start'),
@@ -14,5 +15,6 @@ urlpatterns = [
     path('public/product/<str:token>/', product.public_product, name='public_product'),
     path('autocomplete/', autocomplete.autocomplete, name='autocomplete'),
     path('employee_table/', employee_table.employee_table, name='employee_table'),
+    path('map/', map.map, name='map'),
 ]
 

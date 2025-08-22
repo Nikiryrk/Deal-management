@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Компании на карте - Bitrix24</title>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey={{ yandex_api_key }}&lang=ru_RU" type="text/javascript"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/map.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>🗺️ Компании на карте</h2>
+
+            {% if error %}
+            <div class="error">
+                <strong>Ошибка:</strong> {{ error }}
+            </div>
+            {% endif %}
+
+            <div class="stats">
+                Всего компаний: <strong>{{ points|length }}</strong><br>
+                С адресами: <strong>{{ points_with_coords|length }}</strong><br>
+                Без координат: <strong>{{ points_without_coords }}</strong>
+            </div>
+
+            {% if points %}
+            <div class="company-list">
+                {% for point in points %}
+                <div class="company-item" data-company-id="{{ point.id }}" onclick="focusOnCompany('{{ point.id }}')">
+                    <div class="company-title">{{ point.title }}</div>
+
+                    <div class="company-address {% if not point.has_address %}no-address{% endif %}">
+                        📍 {{ point.address|default:"Адрес не указан" }}
+                    </div>
+
+                    {% if point.geocode %}
+                    <div class="company-contacts">
+                        {% if point.phone %}
+                        <div class="contact-item">📞 {{ point.phone }}</div>
+                        {% endif %}
+                        {% if point.email %}
+                        <div class="contact-item">✉️ {{ point.email }}</div>
+                        {% endif %}
+                        <div class="contact-item">Координаты: {{ point.geocode.latitude|floatformat:4 }}, {{ point.geocode.longitude|floatformat:4 }}</div>
+                    </div>
+                    {% else %}
+                    <div class="company-contacts no-address">
+                        ❌ Не удалось определить координаты
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="empty-state">
+                <h3>🤔 Компании не найдены</h3>
+                <p>Попробуйте проверить наличие компаний в Bitrix24 CRM</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        ymaps.ready(init);
+
+        let map;
+        let placemarks = {};
+        let companyItems = {};
+
+        function init() {
+            map = new ymaps.Map('map', {
+                center: [55.7558, 37.6173],
+                zoom: 10
+            });
+
+            document.querySelectorAll('.company-item').forEach(item => {
+                const companyId = item.getAttribute('data-company-id');
+                companyItems[companyId] = item;
+            });
+
+            {% for point in points_with_coords %}
+            {% if point.geocode %}
+            (function() {
+                const companyId = '{{ point.id }}';
+                const coordinates = [{{ point.geocode.latitude }}, {{ point.geocode.longitude }}];
+
+                const placemark = new ymaps.Placemark(coordinates, {
+                    balloonContentHeader: '<div class="balloon-title">{{ point.title|escapejs }}</div>',
+                    balloonContentBody: `
+                        <div class="balloon-content">
+                            <div class="balloon-address">📍 {{ point.address|escapejs }}</div>
+                            {% if point.phone %}
+                            <div class="balloon-contacts">📞 {{ point.phone|escapejs }}</div>
+                            {% endif %}
+                            {% if point.email %}
+                            <div class="balloon-contacts">✉️ {{ point.email|escapejs }}</div>
+                            {% endif %}
+                        </div>
+                    `,
+                    balloonContentFooter: 'ID: {{ point.id }}'
+                }, {
+                    preset: 'islands#blueCompanyIcon'
+                });
+
+                placemark.events.add('click', function() {
+                    focusOnCompany(companyId);
+                });
+
+                map.geoObjects.add(placemark);
+                placemarks[companyId] = placemark;
+            })();
+            {% endif %}
+            {% endfor %}
+
+            if (map.geoObjects.getLength() > 0) {
+                map.setBounds(map.geoObjects.getBounds(), {
+                    checkZoomRange: true
+                });
+            }
+        }
+
+        function focusOnCompany(companyId) {
+            document.querySelectorAll('.company-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+
+            if (companyItems[companyId]) {
+                companyItems[companyId].classList.add('selected');
+                companyItems[companyId].scrollIntoView({behavior: 'smooth', block: 'center'});
+            }
+
+            if (placemarks[companyId]) {
+                map.setCenter(placemarks[companyId].geometry.getCoordinates(), 15);
+                placemarks[companyId].balloon.open();
+            }
+        }
+    </script>
+</body>
+</html>
